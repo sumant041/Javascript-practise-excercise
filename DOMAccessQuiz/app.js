@@ -1,139 +1,120 @@
+
 var marg = 0;
 
+function changeBgColor(elem, val){
+  $(elem).css({ "background-color" : val});
+}
+
 function identifyById() {
-element = document.getElementsById("para1");
-console.log(element);
+  console.log($("#para1"));
 }
 
 function identifyByClass() {
-element = document.getElementByClassName("class1");
-console.log(element);
+  console.log($(".class1"));
 }
 
 function byTag() {
-element = document.getElementByTagname("p");
-console.log(element);
+  console.log($("p"));
 }
 
 function changeBackground() {
-element = document.getElementById("block1");
-element.style.backgroundColor="blue";
+  changeBgColor("#block1", "purple");
 }
 
 function increaseFont() {
-element = document.getElementById("block2");
-element.style.fontSize="1.995em";
+  $("#block2").css({"font-size": "1.995em"});
 }
 
 function changeFontColor() {
-element = document.getElementById("block3");
-element.style.backgroundColor="green";
+  changeBgColor("#block3", "green");
 }
 
 function revertColor() {
-element = document.getElementById("block3");
-element.style.backgroundColor="white";
+  changeBgColor("#block3", "white");
 }
 
 function hide() {
-element = document.getElementById("block4");
-element.style.display="none";
+  $("#block4").css({"display" : "none"});
 }
 
 function changeBackColor(color, className) {
-  elements = document.getElementsByClassName(className);
-    if(className==="box1"){
-       for(var i = 0; i < elements.length; i++){
-         elements[i].style.backgroundColor = "green";
-       }
-}else {
-  for(var i=0; i< elements.length;i++)
-  elements[i].style.backgroundColor = "purple";
+  console.log("changeBackColor");
+  changeBgColor("." + className, color);
+
 }
 
 function numbersOnly(e) {
   if(parseInt(e.key) >= 0 && parseInt(e.key) <= 9){
-       return e;
-     }
-return -1;
+    return e;
+  }
+return false;
 }
 
 function addAdjacent() {
-   element = document.getElementById("para2");
-   para = document.createElement("p");
-   sam = document.createTextNode("I got generated on the fly...");
-   para.appendChild(sam);
-   element.appendChild(para);
-  }
-
+  $("<p>",{    text: "I got generated on the fly..!!"
+  }).appendTo("#para2");
 
 }
 
 function removePara() {
-  element = document.getElementById("para3");
-  elementb = document.getElementById("para4");
-  element.parentElement.removeChild(elementb);
+  $("#para4").remove();
 
 }
-  function myMove() {
-     element = document.getElementById("box5");
 
-       pos = 0;
-       id = setInterval(frame, 95);
-      function frame() {
-          if (pos == 360) {
-              clearInterval(id);
-          } else {
-              pos++;
-              element.style.top = pos +'px';
-              elem.style.left = pos +'px';
-          }
-      }
+function myMove() {
+  element = $("#box5");
+  pos = 0;
+  id = setInterval(frame,50);
+
+  function frame() {
+    console.log(pos);
+    if(pos == 350){
+      clearInterval(id);
+    } else {
+      pos++;
+      element.css({
+        "margin-left": pos + 'px',
+        "margin-top": pos + 'px'
+    });
+
+    }
   }
-
+}
 
 function myFunction() {
-  element = document.getElementById("fname");
-  element.value = element.value.toUpperCase();
-
+  valueToUppercase("#fname");
 }
 
 function changeOn() {
-  element = document.getElementById("fname1");
-  element.value = element.value.toUpperCase();
+  valueToUppercase("#fname1");
+}
+
+function valueToUppercase(name){
+  $(name).val($(name).val().toUpperCase());
 }
 
 function preferedBrowser() {
-  element = document.getElementById("browsers");
-  console.log(element.value);
+  console.log($("#browsers").val());
+
 }
+
 
 function color(elem) {
-elem.style.backgroundColor="purple";
+  changeBgColor(elem, "red");
 }
+
 
 function inputxt(s) {
-   element = document.getElementById("demo");
-   element = document.getElementById(s.value);
-   element.textContent = s.value;
-    if (!element.match(/\S/))
-        {
-            alert("Field is blank");
-            return false;
-        }
-        else
-    {
-        return true;
-    }
-}
-
+  console.log(s);
+  $("#demo").text(s.value);
+  }
 
 function confirmInput() {
-  n=prompt("Enter something");
+  prompt("Hey Man!!!");
 }
 
 function message() {
- alert("Hey man!!");
+  alert("Stay Hungry Stay foolish");
 }
 
 function keydown(n) {
@@ -142,21 +123,22 @@ function keydown(n) {
 
 function keypress(n) {
   console.log(n.code);
-  element = document.getElementById("keycode");
-  element.textContent = n.code;
+  $(keycode).text(n.code);
 }
 
 function keyup() {
-  element = document.getElementById("fname2");
-  element.value = element.value.toUpperCase();
-
+  valueToUppercase("#fname2");
 }
 
 function writeMessage() {
-  elements = document.getElementsByTagName("input");
-   for(i = 0; i < elements.length; i++){
-     if(elements[i].name=="myInput"){
-       elements[i++].value = elements[i].value;
-     }
+  elements = $("input");
+    var temp = "";
+   $.each(elements,function(i,e){
+      if(e.name == "sam"){
+       temp = $(e).val();
+      }
+      else if(e.name == "sam1"){
+      $(e).val(temp);
     }
-  }
+  })
+}
